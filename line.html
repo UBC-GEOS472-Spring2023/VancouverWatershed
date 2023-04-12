@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Add an ant path animation to a line</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiaW9yb21pZWgiLCJhIjoiY2xlcmRweTRyMDNuaDN2bzBiMGw4ZWo2byJ9.x1cKGLXR128QXXQlQa3O6A';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/dark-v11', // style URL
+        center: [-73.9709, 40.6712], // starting position [lng, lat]
+        zoom: 15.773 // starting zoom
+    });
+
+    
+
+    map.on('load', () => {
+        
+
+        // add a line layer without line-dasharray defined to fill the gaps in the dashed line
+        map.addLayer({
+            id: 'line-background',
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: 'https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_mains.json' // replace this with the url of your own geojson
+      },
+            paint: {
+                'line-color': 'yellow',
+                'line-width': 6,
+                'line-opacity': 0.4
+            }
+        });
+
+        // add a line layer with line-dasharray set to the first value in dashArraySequence
+        map.addLayer({
+            type: 'line',
+            source: {
+        type: 'geojson',
+        data: 'https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_mains.json' // replace this with the url of your own geojson
+      },
+            id: 'line-dashed',
+            paint: {
+                'line-color': 'yellow',
+                'line-width': 6,
+                'line-dasharray': [0, 4, 3]
+            }
+        });
+
+        // technique based on https://jsfiddle.net/2mws8y3q/
+        // an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
+        const dashArraySequence = [
+            [0, 4, 3],
+            [0.5, 4, 2.5],
+            [1, 4, 2],
+            [1.5, 4, 1.5],
+            [2, 4, 1],
+            [2.5, 4, 0.5],
+            [3, 4, 0],
+            [0, 0.5, 3, 3.5],
+            [0, 1, 3, 3],
+            [0, 1.5, 3, 2.5],
+            [0, 2, 3, 2],
+            [0, 2.5, 3, 1.5],
+            [0, 3, 3, 1],
+            [0, 3.5, 3, 0.5]
+        ];
+
+        let step = 0;
+
+        function animateDashArray(timestamp) {
+            // Update line-dasharray using the next value in dashArraySequence. The
+            // divisor in the expression `timestamp / 50` controls the animation speed.
+            const newStep = parseInt(
+                (timestamp / 50) % dashArraySequence.length
+            );
+
+            if (newStep !== step) {
+                map.setPaintProperty(
+                    'line-dashed',
+                    'line-dasharray',
+                    dashArraySequence[step]
+                );
+                step = newStep;
+            }
+
+            // Request the next frame of the animation.
+            requestAnimationFrame(animateDashArray);
+        }
+
+        // start the animation
+        animateDashArray(0);
+    });
+</script>
+
+</body>
+</html>
