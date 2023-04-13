@@ -7,12 +7,17 @@ def compare_coordinates(coord1, coord2, prev_coord):
     distance1 = math.sqrt((coord1[0] - prev_coord[0]) ** 2 + (coord1[1] - prev_coord[1]) ** 2)
     distance2 = math.sqrt((coord2[0] - prev_coord[0]) ** 2 + (coord2[1] - prev_coord[1]) ** 2)
 
-    if distance1 < distance2:
+    if coord1[0] < coord2[0]:
         return -1
-    elif distance1 > distance2:
+    elif coord1[0] > coord2[0]:
         return 1
     else:
-        return 0
+        if distance1 < distance2:
+            return -1
+        elif distance1 > distance2:
+            return 1
+        else:
+            return 0
 
 # Load the GeoJSON file
 with open('C:/Users/Jeremy/OneDrive/Documents/GitHub/ioromieh.github.io/projects/VancouverWatershed/vector_geojson/vancouver_mains3_testfeature.geojson', 'r') as f:
@@ -36,6 +41,9 @@ for feature in features:
         sorted_coordinates.append(next_coord)
         prev_coord = next_coord
         coordinates.remove(next_coord)
+
+    # Reverse the sorted list of coordinates to order them from furthest west to furthest east
+    sorted_coordinates.reverse()
 
     # Update the feature with the sorted coordinates
     feature['geometry']['coordinates'] = sorted_coordinates
