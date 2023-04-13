@@ -20,7 +20,7 @@ def compare_coordinates(coord1, coord2, prev_coord):
             return 0
 
 # Load the GeoJSON file
-with open('C:/Users/Jeremy/OneDrive/Documents/GitHub/ioromieh.github.io/projects/VancouverWatershed/vector_geojson/vancouver_mains3_testfeature.geojson', 'r') as f:
+with open('C:/Users/Jeremy/OneDrive/Documents/GitHub/ioromieh.github.io/projects/VancouverWatershed/vector_geojson/vancouver_mains_single.json', 'r') as f:
     geojson_data = json.load(f)
 
 # Extract the features from the GeoJSON
