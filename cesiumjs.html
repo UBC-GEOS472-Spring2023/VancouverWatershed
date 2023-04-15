@@ -35,43 +35,43 @@ viewer.scene.globe.enableLighting = false;
 Cesium.GeoJsonDataSource.load('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_main_merge.geojson').then((dataSource) => {
   viewer.dataSources.add(dataSource);
 
-  const lineBackground = dataSource.entities.add({
-    polyline: {
-      positions: dataSource.entities.values.map((entity) => entity.position.getValue(viewer.clock.currentTime)),
-      width: 6,
-      material: Cesium.Color.YELLOW.withAlpha(0.4)
-    }
-  });
+//   const lineBackground = dataSource.entities.add({
+//     polyline: {
+//       positions: dataSource.entities.values.map((entity) => entity.position.getValue(viewer.clock.currentTime)),
+//       width: 6,
+//       material: Cesium.Color.WHITE.withAlpha(1)
+//     }
+//   });
 
-  const lineDashed = dataSource.entities.add({
-    polyline: {
-      positions: dataSource.entities.values.map((entity) => entity.position.getValue(viewer.clock.currentTime)),
-      width: 6,
-      material: Cesium.Color.YELLOW.withAlpha(1),
-      dashLength: 16,
-      dashPattern: 255
-    }
-  });
+//   const lineDashed = dataSource.entities.add({
+//     polyline: {
+//       positions: dataSource.entities.values.map((entity) => entity.position.getValue(viewer.clock.currentTime)),
+//       width: 6,
+//       material: Cesium.Color.BLUE.withAlpha(1),
+//       dashLength: 2,
+//       dashPattern: 255
+//     }
+//   });
 
-  // Dash pattern array
-  const dashArraySequence = [
-            [0, 4, 3],
-            [0.5, 4, 2.5],
-            [1, 4, 2],
-            [1.5, 4, 1.5],
-            [2, 4, 1],
-            [2.5, 4, 0.5],
-            [3, 4, 0],
-            [0, 0.5, 3, 3.5],
-            [0, 1, 3, 3],
-            [0, 1.5, 3, 2.5],
-            [0, 2, 3, 2],
-            [0, 2.5, 3, 1.5],
-            [0, 3, 3, 1],
-            [0, 3.5, 3, 0.5]
-  ];
+//   // Dash pattern array
+//   const dashArraySequence = [
+//             [0, 4, 3],
+//             [0.5, 4, 2.5],
+//             [1, 4, 2],
+//             [1.5, 4, 1.5],
+//             [2, 4, 1],
+//             [2.5, 4, 0.5],
+//             [3, 4, 0],
+//             [0, 0.5, 3, 3.5],
+//             [0, 1, 3, 3],
+//             [0, 1.5, 3, 2.5],
+//             [0, 2, 3, 2],
+//             [0, 2.5, 3, 1.5],
+//             [0, 3, 3, 1],
+//             [0, 3.5, 3, 0.5]
+//   ];
 
-  let step = 0;
+//   let step = 0;
 
  // This is supposed to update the dash pattern with the next value in dashArraySequence. 
  // Dividing the timestamp by "50" is supposed to slow down the animation speed.
