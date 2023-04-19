@@ -10,14 +10,15 @@
 <body>
   <div id="cesiumContainer"></div>
   <script>
+
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1N2YyMzFkNy0yOTVhLTRkZjMtOTJjOC01MWVmYmY4ZDhmOWEiLCJpZCI6MTMzNjIwLCJpYXQiOjE2ODE1MTQyMDJ9.gzAbp11zsOFF5V6ilE586Ix2Am1OtyTvQMQ6Z8xTCmw';
 
     const viewer = new Cesium.Viewer('cesiumContainer', {
         terrainProvider: Cesium.createWorldTerrain({
-    requestVertexNormals: true,
-  }),
-});
-viewer.scene.globe.enableLighting = false; 
+        requestVertexNormals: true,
+        }),
+    });
+    viewer.scene.globe.enableLighting = false; 
 
 // OSM global 3d building layer
     const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());   
@@ -31,9 +32,31 @@ viewer.scene.globe.enableLighting = false;
       }
     }); 
 
-// Load GeoJSON data
-Cesium.GeoJsonDataSource.load('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_main_merge.geojson').then((dataSource) => {
+    // var viewer = new Cesium.Viewer('cesiumContainer');
+
+var dataSource = new Cesium.GeoJsonDataSource();
+dataSource.load('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_main_merge.geojson').then(function() {
   viewer.dataSources.add(dataSource);
+  
+  var entity = dataSource.entities.values[0];
+  entity.path.show = true;
+  entity.path.width = 5;
+  entity.path.material = new Cesium.PolylineGlowMaterialProperty({
+    glowPower: 0.2,
+    color: Cesium.Color.DEEPSKYBLUE
+  });
+  entity.path.resolution = 100;
+
+  viewer.clock.currentTime = viewer.clock.startTime;
+  viewer.clock.multiplier = 10;
+  viewer.clock.shouldAnimate = true;
+});
+
+
+
+// // Load GeoJSON data
+// Cesium.GeoJsonDataSource.load('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_main_merge.geojson').then((dataSource) => {
+//   viewer.dataSources.add(dataSource);
 
 //   const lineBackground = dataSource.entities.add({
 //     polyline: {
@@ -73,23 +96,23 @@ Cesium.GeoJsonDataSource.load('https://raw.githubusercontent.com/UBC-GEOS472-Spr
 
 //   let step = 0;
 
- // This is supposed to update the dash pattern with the next value in dashArraySequence. 
- // Dividing the timestamp by "50" is supposed to slow down the animation speed.
- // But none of this works right now 
-  function animateDashPattern(timestamp) {
-    const newStep = parseInt((timestamp / 50) % dashArraySequence.length);
-    if (newStep !== step) {
-      lineDashed.polyline.dashPattern = dashArraySequence[step];
-      step = newStep;
-    }
+//  // This is supposed to update the dash pattern with the next value in dashArraySequence. 
+//  // Dividing the timestamp by "50" is supposed to slow down the animation speed.
+//  // But none of this works right now 
+//   function animateDashPattern(timestamp) {
+//     const newStep = parseInt((timestamp / 50) % dashArraySequence.length);
+//     if (newStep !== step) {
+//       lineDashed.polyline.dashPattern = dashArraySequence[step];
+//       step = newStep;
+//     }
 
-    requestAnimationFrame(animateDashPattern);
-  }
+//     requestAnimationFrame(animateDashPattern);
+//   }
 
-  viewer.scene.postRender.addEventListener(() => {
-    animateDashPattern(0);
-  });
-});  
+//   viewer.scene.postRender.addEventListener(() => {
+//     animateDashPattern(0);
+//   });
+// });  
   </script>
  </div>
 </body>
