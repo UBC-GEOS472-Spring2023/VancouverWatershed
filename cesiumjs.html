@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.104/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.104/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1N2YyMzFkNy0yOTVhLTRkZjMtOTJjOC01MWVmYmY4ZDhmOWEiLCJpZCI6MTMzNjIwLCJpYXQiOjE2ODE1MTQyMDJ9.gzAbp11zsOFF5V6ilE586Ix2Am1OtyTvQMQ6Z8xTCmw';
+
+    const viewer = new Cesium.Viewer('cesiumContainer', {
+        terrainProvider: Cesium.createWorldTerrain({
+        requestVertexNormals: true,
+        }),
+    });
+    viewer.scene.globe.enableLighting = false; 
+
+// OSM global 3d building layer
+    const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());   
+
+// Camera controls
+    viewer.camera.flyTo({
+      destination : Cesium.Cartesian3.fromDegrees( -123.166483, 49.242187, 800), // Lat, Long, altitude
+      orientation : {
+        heading : Cesium.Math.toRadians(30.0),
+        pitch : Cesium.Math.toRadians(-15.0),
+      }
+    }); 
+
+    // var viewer = new Cesium.Viewer('cesiumContainer');
+
+var dataSource = new Cesium.GeoJsonDataSource();
+dataSource.load('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_main_merge.geojson').then(function() {
+  viewer.dataSources.add(dataSource);
+  
+  var entity = dataSource.entities.values[0];
+  entity.path.show = true;
+  entity.path.width = 5;
+  entity.path.material = new Cesium.PolylineGlowMaterialProperty({
+    glowPower: 0.2,
+    color: Cesium.Color.DEEPSKYBLUE
+  });
+  entity.path.resolution = 100;
+
+  viewer.clock.currentTime = viewer.clock.startTime;
+  viewer.clock.multiplier = 10;
+  viewer.clock.shouldAnimate = true;
+});
+
+
+
+// // Load GeoJSON data
+// Cesium.GeoJsonDataSource.load('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_main_merge.geojson').then((dataSource) => {
+//   viewer.dataSources.add(dataSource);
+
+//   const lineBackground = dataSource.entities.add({
+//     polyline: {
+//       positions: dataSource.entities.values.map((entity) => entity.position.getValue(viewer.clock.currentTime)),
+//       width: 6,
+//       material: Cesium.Color.WHITE.withAlpha(1)
+//     }
+//   });
+
+//   const lineDashed = dataSource.entities.add({
+//     polyline: {
+//       positions: dataSource.entities.values.map((entity) => entity.position.getValue(viewer.clock.currentTime)),
+//       width: 6,
+//       material: Cesium.Color.BLUE.withAlpha(1),
+//       dashLength: 2,
+//       dashPattern: 255
+//     }
+//   });
+
+//   // Dash pattern array
+//   const dashArraySequence = [
+//             [0, 4, 3],
+//             [0.5, 4, 2.5],
+//             [1, 4, 2],
+//             [1.5, 4, 1.5],
+//             [2, 4, 1],
+//             [2.5, 4, 0.5],
+//             [3, 4, 0],
+//             [0, 0.5, 3, 3.5],
+//             [0, 1, 3, 3],
+//             [0, 1.5, 3, 2.5],
+//             [0, 2, 3, 2],
+//             [0, 2.5, 3, 1.5],
+//             [0, 3, 3, 1],
+//             [0, 3.5, 3, 0.5]
+//   ];
+
+//   let step = 0;
+
+//  // This is supposed to update the dash pattern with the next value in dashArraySequence. 
+//  // Dividing the timestamp by "50" is supposed to slow down the animation speed.
+//  // But none of this works right now 
+//   function animateDashPattern(timestamp) {
+//     const newStep = parseInt((timestamp / 50) % dashArraySequence.length);
+//     if (newStep !== step) {
+//       lineDashed.polyline.dashPattern = dashArraySequence[step];
+//       step = newStep;
+//     }
+
+//     requestAnimationFrame(animateDashPattern);
+//   }
+
+//   viewer.scene.postRender.addEventListener(() => {
+//     animateDashPattern(0);
+//   });
+// });  
+  </script>
+ </div>
+</body>
+</html>
