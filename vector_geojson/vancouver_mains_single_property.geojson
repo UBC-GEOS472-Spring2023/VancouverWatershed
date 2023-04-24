@@ -6189,7 +6189,8 @@
         "OBJECTID": 2,
         "CID": 1,
         "ORIG_FID": 1,
-        "SHAPE_Length": 899.520632814279
+        "SHAPE_Length": 899.520632814279,
+        "order": 2
       }
     },
     {
@@ -12364,7 +12365,8 @@
         "OBJECTID": 4,
         "CID": 1,
         "ORIG_FID": 1,
-        "SHAPE_Length": 15.095763684889267
+        "SHAPE_Length": 15.095763684889267,
+        "order": 4
       }
     },
     {
@@ -12927,7 +12929,8 @@
         "OBJECTID": 5,
         "CID": 1,
         "ORIG_FID": 1,
-        "SHAPE_Length": 323.63094885695716
+        "SHAPE_Length": 323.63094885695716,
+        "order": 5
       }
     },
     {
