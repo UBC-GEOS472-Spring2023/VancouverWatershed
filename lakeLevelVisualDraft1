@@ -30,7 +30,7 @@
       var map = L.map('mapid', {
           center: [49.3791, -123.122593],
           zoom: 12.5
-        } 
+        }
       );
        //add basemap
        var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
