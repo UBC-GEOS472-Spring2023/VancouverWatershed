@@ -4542,7 +4542,7 @@
         "CID": 1,
         "ORIG_FID": 1,
         "SHAPE_Length": 2749.024914944433,
-        "order": 1
+        "ORDER": 100
       }
     },
     {
@@ -6190,7 +6190,7 @@
         "CID": 1,
         "ORIG_FID": 1,
         "SHAPE_Length": 899.520632814279,
-        "order": 2
+        "ORDER": 200
       }
     },
     {
@@ -12290,7 +12290,7 @@
         "CID": 1,
         "ORIG_FID": 1,
         "SHAPE_Length": 3532.7738115243656,
-        "order": 3
+        "ORDER": 300
       }
     },
     {
@@ -12366,7 +12366,7 @@
         "CID": 1,
         "ORIG_FID": 1,
         "SHAPE_Length": 15.095763684889267,
-        "order": 4
+        "ORDER": 400
       }
     },
     {
@@ -12930,7 +12930,7 @@
         "CID": 1,
         "ORIG_FID": 1,
         "SHAPE_Length": 323.63094885695716,
-        "order": 5
+        "ORDER": 500
       }
     },
     {
@@ -19598,7 +19598,7 @@
         "CID": 1,
         "ORIG_FID": 1,
         "SHAPE_Length": 3931.014183532017,
-        "order": 6
+        "ORDER": 600
       }
     },
     {
@@ -28542,7 +28542,7 @@
         "CID": 1,
         "ORIG_FID": 1,
         "SHAPE_Length": 5005.581502291606,
-        "order": 7
+        "ORDER": 700
       }
     }
   ]
