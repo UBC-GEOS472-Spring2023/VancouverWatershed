@@ -37,30 +37,21 @@
 	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
 }
 ).addTo(map);
-   
-//add slider
-var slidervar = document.getElementById('slider');
-noUiSlider.create(slidervar, {
-    connect: true,
-    start: [ 1, 100 ],
-    range: {
-        min: 1,
-        max: 100
-    }
-});
-  
 
     //add capilano lake geojson
     fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/capilanoGeoJSONtest.geojson')
   .then(response => response.json())
   .then(data => {
   
-  
     //define a function to style the geojson layer based on its properties
-  
     function lakeStyle(feature) {
-      return {
-        fillColor: feature.properties.color, 
+    //get the id property of the feature
+    var id = feature.properties.ID;
+    //use the id to look up the corresponding color property
+    var color = feature.properties.Colors[id]
+       
+        return {
+        fillColor: color, 
         weight: 2,
         opacity: 1,
         color: '#ffffff',
@@ -68,12 +59,40 @@ noUiSlider.create(slidervar, {
       };
     }
 
+
     // Create a Leaflet GeoJSON layer from the GeoJSON data with style function
-    const lakesLayer = L.geoJSON(data);
-    style: lakeStyle
-     // Add the GeoJSON layer to the map
-     lakesLayer.addTo(map);
+    const lakesLayer = L.geoJSON(data, {
+        style: lakeStyle,
     });
+    
+    // Add the GeoJSON layer to the map
+    lakesLayer.addTo(map);
+
+    // Find the minimum and maximum ID values in the GeoJSON
+    let minID = 1;
+    let maxID = 100;
+    data.features.forEach(feature => {
+        
+        if (id < minID) {
+            minID = ID;
+        }
+        if (id > maxID) {
+            maxID = ID;
+        }
+    });
+
+    // Add the slider
+    var slidervar = document.getElementById('slider');
+    noUiSlider.create(slidervar, {
+        connect: true,
+        start: [ minID, maxID ],
+        range: {
+            min: minID,
+            max: maxID
+        }
+    });
+});
+
 
      </script>
   </body>
