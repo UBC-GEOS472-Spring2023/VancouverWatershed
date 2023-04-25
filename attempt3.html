@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capilano and Seymour Lakes Total Monthly River Flow Input</title>
+    <meta charset="utf-8" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
+    <!-- Correct path to p5.min.js -->
+    <script src="./p5.min.js"></script>
+ 
+  </head>
+
+  <body>
+    <div id="mapid" style="width: 1000px; height: 750px; top: 0px"></div>
+    <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+    <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+    <input type="number" min='1' max='100' id="input-number-min">
+
+    </div>
+
+    <script>
+      //make leaflet map abd centre over lakes
+      var map = L.map('mapid', {
+          center: [49.3791, -123.122593],
+          zoom: 12.5
+        } 
+      );
+       //add basemap
+       var mapboxlayer = L.tileLayer('https://api.mapbox.com/styles/v1/kmcintyre/clgt2oixj001801pz6elo885h/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia21jaW50eXJlIiwiYSI6ImNsZW42aGVhcTA0ZHk0M3IxYnZ3dTI3NnQifQ.fc7azP61GdiiJbkhCKXHcw', {
+        attribution: 'Map data &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1Ijoia21jaW50eXJlIiwiYSI6ImNsZW42aGVhcTA0ZHk0M3IxYnZ3dTI3NnQifQ.fc7azP61GdiiJbkhCKXHcw'
+    }).addTo(map);
+
+    //add capilano lake geojson
+    fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/capilanoGeoJSONtest.geojson')
+  .then(response => response.json())
+  .then(data => {
+      //define a function to style the geojson layer based on its properties
+      function lakeStyle(feature) {
+        return {
+        fillColor: feature.properties.Color, 
+        weight: 2,
+        opacity: 1,
+        color: '#ffffff',
+        fillOpacity: 0.5
+      };
+    }
+
+    // Create a Leaflet GeoJSON layer from the GeoJSON data with style function
+    const lakesLayer = L.geoJSON(data, {
+        style: lakeStyle,
+        onEachFeature: function(feature, layer) {
+            // Set the slider position based on the feature ID
+            const slider = document.getElementById('slider');
+            slider.noUiSlider.set([feature.properties.ID, 1]);
+    
+            // Change the polygon color based on the feature Color property
+            layer.setStyle({
+                fillColor: feature.properties.Color
+            });
+        }
+    });
+
+    // Add the GeoJSON layer to the map
+    lakesLayer.addTo(map);
+//this is the function that allows each slider value to have an associated colour, this was for testing purposes and can be adjusted
+    function getColor(value) {
+        if (value <= 1) {
+        return '#FBB7C14';
+        } else if (value <= 2) {
+        return '#03045E';
+        } else if (value <= 3) {
+        return '#FBB7C1';
+        } else if (value <= 4){
+            return '#0077B18';
+        } else if (value <= 5){
+            return '#0077B10';
+        } else if (value <= 6){
+            return '#0077B10';
+        } else if (value <= 7){
+            return '#FBB7C2';
+        } else if (value <= 8){
+            return '#03045E';
+        } else if (value <= 9){
+            return '#BFD7EA';
+        } else if (value <= 10){
+            return '#0077B13';
+        } else if (value <= 11){
+            return '#BFD7EA';
+        } else if (value <= 12){
+            return '#03045E';
+        } else if (value <= 13){
+            return '#BFD7EA';
+        } else if (value <= 14){
+            return '#0077B21';
+        } else if (value <= 15){
+            return '#FBB7C0';
+        } else if (value <= 16){
+            return '#FBB7C18';
+        } else if (value <= 17){
+            return '#FBB7C6';
+        } else if (value <= 18){
+            return '#0077B6';
+        } else if (value <= 19){
+            return '#BFD7EA';
+        } else if (value <= 20){
+            return '#03045E';
+        } else if (value <= 21){
+            return '#BFD7EA';
+        } else if (value <= 22){
+            return '#03045E';
+        } else if (value <= 23){
+            return '#FBB7C0';
+        } else if (value <= 24){
+            return '#03045E';
+        } else if (value <= 25){
+            return '#FBB7C13';
+        } else if (value <= 26){
+            return '#BFD7EA';
+        } else if (value <= 27){
+            return '#D72645';
+        } else if (value <= 28){
+            return '#BFD7EA';
+        } else if (value <= 29){
+            return '#BFD7EA';
+        } else if (value <= 30){
+            return '#BFD7EA';
+        } else if (value <= 31){
+            return '#FBB7C2';
+        } else if (value <= 32){
+            return '#0077B9';
+        } else if (value <= 33){
+            return '#FBB7C7';
+        } else if (value <= 34){
+            return '#0077B7';
+        } else if (value <= 35){
+            return '#D72639';
+        } else if (value <= 36){
+            return '#0077B8';
+        } else if (value <= 37){
+            return '#FBB7C22';
+        } else if (value <= 38){
+            return '#0077B22';
+        } else if (value <= 39){
+            return '#D72643';
+        } else if (value <= 40){
+            return '#03045E';
+        } else if (value <= 41){
+            return '#BFD7EA';
+        } else if (value <= 42){
+            return '#0077B12';
+        } else if (value <= 43){
+            return '#FBB7C0';
+        } else if (value <= 44){
+            return '#0077B7';
+        } else if (value <= 45){
+            return '#FBB7C11';
+        } else if (value <= 46){
+            return '#03045E';
+        } else if (value <= 47){
+            return '#FBB7C20';
+        } else if (value <= 48){
+            return '#03045E';
+        } else if (value <= 49){
+            return '#FBB7C15';
+        } else if (value <= 50){
+            return '#0077B23';
+        } else if (value <= 51){
+            return '#FBB7C5';
+        } else if (value <= 52){
+            return '#03045E';
+        } else if (value <= 53){
+            return '#0077B6';
+        } else if (value <= 54){
+            return '#BFD7EA';
+        } else if (value <= 55){
+            return '#D72644';
+        } else if (value <= 56){
+            return '#BFD7EA';
+        } else if (value <= 57){
+            return '#BFD7EA';
+        } else if (value <= 58){
+            return '#0077B16';
+        } else if (value <= 59){
+            return '#BFD7EA';
+        } else if (value <= 60){
+            return '#BFD7EA';
+        } else if (value <= 61){
+            return '#BFD7EA';
+        } else if (value <= 62){
+            return '#0077B11';
+        } else if (value <= 63){
+            return '#D72646';
+        } else if (value <= 64){
+            return '#03045E';
+        } else if (value <= 65){
+            return '#FBB7C17';
+        } else if (value <= 66){
+            return '#03045E';
+        } else if (value <= 67){
+            return '#FBB7C12';
+        } else if (value <= 68){
+            return '#FBB7C23';
+        } else if (value <= 69){
+            return '#FBB7C9';
+        } else if (value <= 70){
+            return '#0077B8';
+        } else if (value <= 71){
+            return '#FBB7C1';
+        } else if (value <= 72){
+            return '#03045E';
+        } else if (value <= 73){
+            return '#0077B19';
+        } else if (value <= 74){
+            return '#FBB7C3';
+        } else if (value <= 75){
+            return '#FBB7C10';
+        } else if (value <= 76){
+            return '#0077B20';
+        } else if (value <= 77){
+            return '#0077B15';
+        } else if (value <= 78){
+            return '#BFD7EA';
+        } else if (value <= 79){
+            return '#D72640';
+        } else if (value <= 80){
+            return '#03045E';
+        } else if (value <= 81){
+            return '#BFD7EA';
+        } else if (value <= 82){
+            return '#03045E';
+        } else if (value <= 83){
+            return '#D72642';
+        } else if (value <= 84){
+            return '#03045E';
+        } else if (value <= 85){
+            return '#FBB7C21';
+        } else if (value <= 86){
+            return '#0077B17';
+        } else if (value <= 87){
+            return '#D72638';
+        } else if (value <= 88){
+            return '#03045E';
+        } else if (value <= 89){
+            return '#FBB7C4';
+        } else if (value <= 90){
+            return '#BFD7EA';
+        } else if (value <= 91){
+            return '#D72641';
+        } else if (value <= 92){
+            return '#FBB7C19';
+        } else if (value <= 93){
+            return '#BFD7EA';
+        } else if (value <= 94){
+            return '#0077B14';
+        } else if (value <= 95){
+            return '#FBB7C8';
+        } else if (value <= 96){
+            return '#0077B11';
+        } else if (value <= 97){
+            return '#FBB7C16';
+        } else if (value <= 98){
+            return '#0077B92';
+        } else if (value <= 99){
+            return '#FBB7C0';
+        } else if (value <= 100){
+            return '#03045E';
+        } else {
+            return 'red';
+        }
+    }
+// When the slider changes, update the polygon color based on the slider position
+slidervar.noUiSlider.on('update', function(values) {
+  const selectedValue = parseInt(values[0]);
+  const color = getColor(selectedValue);
+  lakesLayer.setStyle({
+    fillColor: color
+  });
+});
+});
+   
+        //add slider
+        var slidervar = document.getElementById('slider');
+    noUiSlider.create(slidervar, {
+    connect: true,
+    start: [ 1, 100 ],
+    range: {
+        min: 1,
+        max: 100
+    }
+});
+     </script>
+  </body>
+</html>
