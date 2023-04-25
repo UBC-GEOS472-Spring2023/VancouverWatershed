@@ -63,7 +63,7 @@
         onEachFeature: function(feature, layer) {
             // Set the slider position based on the feature ID
             const slider = document.getElementById('slider');
-            slider.noUiSlider.set([feature.properties.ID, 1]);
+            slider.noUiSlider.set([feature.properties.ID, 100]);
     
             // Change the polygon color based on the feature Color property
             layer.setStyle({
