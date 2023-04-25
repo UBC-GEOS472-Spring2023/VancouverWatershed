@@ -1,5 +1,5 @@
 # Vancouver Watershed
-Link to the group story essay:
+Link to the group story essay: https://ubc-geos472-spring2023.github.io/VancouverWatershed/index.html
 
 Link to the path analysis visual:
 
