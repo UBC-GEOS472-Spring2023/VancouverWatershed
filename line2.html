@@ -65,7 +65,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaW9yb21pZWgiLCJhIjoiY2xlcmRweTRyMDNuaDN2bzBiM
             }
         }, 10);
     }
-    const response2 = await fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/mains_merge_diss_filter.geojson');
+    const response2 = await fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_mains_full_order1.geojson');
     const data2 = await response2.json();
 
     for (let feature of data2.features) {
