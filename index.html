@@ -484,6 +484,87 @@ function updateInsetLayer(bounds) {
 // setup resize event
 window.addEventListener('resize', scroller.resize);
 
+map.on('load', async () => {
+    // Fetch the GeoJSON data
+    const response = await fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_mainline_full_reorder.geojson');
+    const data = await response.json();
+
+    // Loop through each feature (line) in the GeoJSON
+    for (let feature of data.features) {
+        const coordinates = feature.geometry.coordinates;
+
+        // Start by showing just the first coordinate
+        feature.geometry.coordinates = [coordinates[0]];
+
+        // Add the line to the map
+        map.addSource(`trace_${feature.id}`, { type: 'geojson', data: feature });
+        map.addLayer({
+            'id': `trace_${feature.id}`,
+            'type': 'line',
+            'source': `trace_${feature.id}`,
+            'paint': {
+                'line-color': 'yellow',
+                'line-opacity': 0.75,
+                'line-width': 5
+            }
+        });
+
+        // Setup the viewport
+        // map.jumpTo({ 'center': coordinates[0], 'zoom': 11.5 });
+        // map.setPitch(30);
+
+
+        // On a regular basis, add more coordinates from the saved list and update the map
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < coordinates.length) {
+                feature.geometry.coordinates.push(coordinates[i]);
+                map.getSource(`trace_${feature.id}`).setData(feature);
+                //map.panTo(coordinates[i]);
+                i++;
+            } else {
+                window.clearInterval(timer);
+            }
+        }, 10);
+    }
+    const response2 = await fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/vector_geojson/vancouver_mains_full_order1.geojson');
+    const data2 = await response2.json();
+
+    for (let feature of data2.features) {
+    const coordinates = feature.geometry.coordinates;
+    const delay = feature.properties.ORDER || 0;
+    console.log(delay)
+
+    feature.geometry.coordinates = [coordinates[0]];
+    const sourceId = `trace_${feature.id}_${delay}`;
+    const layerId = `trace_${feature.id}_${delay}`;
+    map.addSource(sourceId, { type: 'geojson', data: feature });
+    map.addLayer({
+        'id': layerId,
+        'type': 'line',
+        'source': sourceId,
+        'paint': {
+        'line-color': 'yellow',
+        'line-opacity': 0.75,
+        'line-width': 5
+        }
+    });
+
+    let i = 0;
+    setTimeout(() => {
+        const timer = setInterval(() => {
+        if (i < coordinates.length) {
+            feature.geometry.coordinates.push(coordinates[i]);
+            map.getSource(sourceId).setData(feature);
+            i++;
+        } else {
+            clearInterval(timer);
+        }
+        }, 10);
+    }, delay * 1000); // convert delay to milliseconds
+    }
+});
+
 </script>
 
 </body>
