@@ -3,12 +3,14 @@ Link to the group story essay: https://ubc-geos472-spring2023.github.io/Vancouve
 
 ## Link to the path analysis visual: ???
 
-## Link to the 3D representation visual: https://ubc-geos472-spring2023.github.io/VancouverWatershed/line3.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line2.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line.html
+## Link to the 3D representation visual: 
+https://ubc-geos472-spring2023.github.io/VancouverWatershed/line3.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line2.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line.html
 
 ![Screenshot of the animated path moving through Vancouver](https://ubc-geos472-spring2023.github.io/VancouverWatershed/animation.png)
 *Figure: An example of what the original plan for the animated visual was supposed to look like. The camera was following the line as the water moved through city*
 
-## Link to the lake level visual: https://ubc-geos472-spring2023.github.io/VancouverWatershed/lakelevelfinal.html
+## Link to the lake level visual: 
+https://ubc-geos472-spring2023.github.io/VancouverWatershed/lakelevelfinal.html
 
 ![The lake recieved over 1000 cubic meters per second during this given season](https://ubc-geos472-spring2023.github.io/VancouverWatershed/bluevisual.png)
 *Figure: The lake recieved over 1000 cubic meters per second during this given season*
