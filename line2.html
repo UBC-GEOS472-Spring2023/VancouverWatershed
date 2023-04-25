@@ -15,11 +15,11 @@ body { margin: 0; padding: 0; }
 <div id="map"></div>
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiaW9yb21pZWgiLCJhIjoiY2xlcmRweTRyMDNuaDN2bzBiMGw4ZWo2byJ9.x1cKGLXR128QXXQlQa3O6A';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWR2ZXJzYXJpYWwtZ2VvZ3JhcGh5IiwiYSI6ImNsZjBvN3FqbjAwZDkzcmw0MGsxNDJ3MDIifQ.aVzxEUcFBUiojBtwfqYe6w';
     const map = new mapboxgl.Map({
         container: 'map',
         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/satellite-v9',
+        style: 'mapbox://styles/adversarial-geography/clgvksdqt002x01pof9qqatn1',
         zoom: 0
     });
 
@@ -49,8 +49,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaW9yb21pZWgiLCJhIjoiY2xlcmRweTRyMDNuaDN2bzBiM
         });
 
         // Setup the viewport
-        map.jumpTo({ 'center': coordinates[0], 'zoom': 14 });
+        map.jumpTo({ 'center': coordinates[0], 'zoom': 11.5 });
         map.setPitch(30);
+
 
         // On a regular basis, add more coordinates from the saved list and update the map
         let i = 0;

@@ -10,8 +10,8 @@ var config = {
     theme: 'dark',
     use3dTerrain: false, //set true for enabling 3D maps.
     auto: false,
-    title: 'SOMETHING SNAZZY ABOUT WATER',
-    subtitle: 'SOMETHING DESCRIPTIVE ABOUT THE PROJECT',
+    title: 'Urban Hydrological Metabolism',
+    subtitle: 'Exploring Water Usage in the Greater Vancouver Water District',
     byline: 'By ______',
     footer: 'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
     chapters: [
@@ -19,14 +19,16 @@ var config = {
             id: 'slug-style-id',
             alignment: 'left',
             hidden: false,
-            title: 'ESTABLISHING SHOT OF NORTH AMERICA',
-            image: './path/to/image/source.png',
-            description: 'Our introduction goes blah blah blahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh',
+            title: '',
+            image: '',
+            description: "Where does our water come from? That’s not a question that is often asked here in Vancouver; we are generally aware that our freshwater comes from the mountains, and since there are mountains as far as the eye can see there must be an abundance of water. Believing that our water comes from the vast Coastal Mountains Range can lead to the dangerous mindset that our water system is safe from the effects of climate change.",
             location: {
-                center: [-81.141, 28.356],
-                zoom: 3.4,
-                pitch: 20,
-                bearing: -45
+                center: [-103.87429, 31.42158],
+                zoom: 3.57,
+                pitch: 26,
+                bearing: 0,
+                speed: 0.5,
+                curve: 1,
             },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
@@ -53,10 +55,12 @@ var config = {
             image: './path/to/image/source.png',
             description: 'Blah blah blahhhhhhhh',
             location: {
-                center: [-122.875, 49.379],
-                zoom: 4,
-                pitch: 60,
-                bearing: -43.2,
+                center: [-104.58308, 46.80711],
+                zoom: 3.57,
+                pitch: 0,
+                bearing: 0,
+                speed: 0.1,
+                curve: 0.5,
                 // flyTo additional controls-
                 // These options control the flight curve, making it move
                 // slowly and zoom out almost completely before starting
@@ -65,7 +69,7 @@ var config = {
                 //curve: 1, // change the speed at which it zooms out
             },
             mapAnimation: 'flyTo',
-            rotateAnimation: true,
+            rotateAnimation: false,
             callback: '',
             onChapterEnter: [],
             onChapterExit: []
