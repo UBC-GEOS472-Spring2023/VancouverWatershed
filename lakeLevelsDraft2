@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capilano and Seymour Lakes Total Monthly River Flow Input</title>
+    <meta charset="utf-8" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
+    <!-- Correct path to p5.min.js -->
+    <script src="./p5.min.js"></script>
+ 
+  </head>
+
+  <body>
+    <div id="mapid" style="width: 1000px; height: 750px; top: 0px"></div>
+    <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+    <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+    <input type="number" min='1' max='100' id="input-number-min">
+
+    </div>
+
+    <script>
+      //make leaflet map abd centre over lakes
+      var map = L.map('mapid', {
+          center: [49.3791, -123.122593],
+          zoom: 12.5
+        } 
+      );
+       //add basemap
+       var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+}
+).addTo(map);
+
+    //add capilano lake geojson
+    fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/capilanoGeoJSONtest.geojson')
+  .then(response => response.json())
+  .then(data => {
+  
+    //define a function to style the geojson layer based on its properties
+    function lakeStyle(feature) {
+        return {
+        fillColor: feature.properties.Color, 
+        weight: 2,
+        opacity: 1,
+        color: '#ffffff',
+        fillOpacity: 0.5
+      };
+    }
+
+    // Create a Leaflet GeoJSON layer from the GeoJSON data with style function
+    const lakesLayer = L.geoJSON(data);
+    style: lakeStyle
+     // Add the GeoJSON layer to the map
+     lakesLayer.addTo(map);
+    });
+
+        //add slider
+var slidervar = document.getElementById('slider');
+noUiSlider.create(slidervar, {
+    connect: true,
+    start: [ 1, 100 ],
+    range: {
+        min: 1,
+        max: 100
+    }
+});
+
+
+     </script>
+  </body>
+</html>

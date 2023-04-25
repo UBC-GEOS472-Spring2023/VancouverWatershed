@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capilano and Seymour Lakes Total Monthly River Flow Input</title>
+    <meta charset="utf-8" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
+    <!-- Correct path to p5.min.js -->
+    <script src="./p5.min.js"></script>
+ 
+  </head>
+
+  <body>
+    <div id="mapid" style="width: 1000px; height: 750px; top: 0px"></div>
+    <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+    <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+    <input type="number" min='1' max='100' id="input-number-min">
+
+    </div>
+
+    <script>
+      //make leaflet map abd centre over lakes
+      var map = L.map('mapid', {
+          center: [49.3791, -123.122593],
+          zoom: 12.5
+        }
+      );
+       //add basemap
+       var mapboxlayer = L.tileLayer('https://api.mapbox.com/styles/v1/kmcintyre/clgt2oixj001801pz6elo885h/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia21jaW50eXJlIiwiYSI6ImNsZW42aGVhcTA0ZHk0M3IxYnZ3dTI3NnQifQ.fc7azP61GdiiJbkhCKXHcw', {
+        attribution: 'Map data &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1Ijoia21jaW50eXJlIiwiYSI6ImNsZW42aGVhcTA0ZHk0M3IxYnZ3dTI3NnQifQ.fc7azP61GdiiJbkhCKXHcw'
+    }).addTo(map);
+}
+).addTo(map);
+
+    //add capilano lake geojson
+    fetch('https://raw.githubusercontent.com/UBC-GEOS472-Spring2023/VancouverWatershed/main/capilanoGeoJSONtest.geojson')
+  .then(response => response.json())
+  .then(data => {
+  
+    //define a function to style the geojson layer based on its properties
+    function lakeStyle(feature) {
+    //get the id property of the feature
+    var id = feature.properties.ID;
+    //use the id to look up the corresponding color property
+    var color = feature.properties.Colors[id]
+       
+        return {
+        fillColor: color, 
+        weight: 2,
+        opacity: 1,
+        color: '#ffffff',
+        fillOpacity: 0.5
+      };
+    }
+
+
+    // Create a Leaflet GeoJSON layer from the GeoJSON data with style function
+    const lakesLayer = L.geoJSON(data, {
+        style: lakeStyle,
+    });
+    
+    // Add the GeoJSON layer to the map
+    lakesLayer.addTo(map);
+
+    // Find the minimum and maximum ID values in the GeoJSON
+    let minID = 1;
+    let maxID = 100;
+    data.features.forEach(feature => {
+        
+        if (id < minID) {
+            minID = ID;
+        }
+        if (id > maxID) {
+            maxID = ID;
+        }
+    });
+
+    // Add the slider
+    var slidervar = document.getElementById('slider');
+    noUiSlider.create(slidervar, {
+        connect: true,
+        start: [ minID, maxID ],
+        range: {
+            min: minID,
+            max: maxID
+        }
+    });
+});
+
+
+     </script>
+  </body>
+</html>
