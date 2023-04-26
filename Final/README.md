@@ -8,6 +8,7 @@ config.js: https://github.com/UBC-GEOS472-Spring2023/VancouverWatershed/blob/mai
 Mapbox Style: mapbox://styles/adversarial-geography/clgvksdqt002x01pof9qqatn1
 
 ![Sentinel-2 Mosaic over Mapbox 3D Terrain](https://github.com/UBC-GEOS472-Spring2023/VancouverWatershed/blob/main/3dpic.png)
+*Figure: Sentinel-2 mosaic, watershed polygons, stream networks, and lakes draped over Mapbox 3D terrain*
 
 ## Link to the path analysis visual:
 https://ubc-geos472-spring2023.github.io/VancouverWatershed/line3.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line2.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line.html
@@ -27,5 +28,11 @@ https://ubc-geos472-spring2023.github.io/VancouverWatershed/lakelevelfinal.html
 https://carlwittmann.github.io/StreamAnimation/
 
 ![Stream Animation](https://ubc-geos472-spring2023.github.io/VancouverWatershed/streamanimationpic.png)
+*Figure: A still image of the unused animation. Probably for the best - the map already struggles to render the static polylines!*
+
+## Water Consumption Infographic
+
+![Water Consumption Infographic](https://github.com/UBC-GEOS472-Spring2023/VancouverWatershed/blob/main/Layout2.jpg)
+*Figure: Concept image of an unimplemented infographic
 
 
