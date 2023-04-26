@@ -1,9 +1,11 @@
 # Vancouver Watershed
 Link to the group story essay: https://ubc-geos472-spring2023.github.io/VancouverWatershed/index.html
 
-## Link to the path analysis visual: ???
+## Link to the 3D Mapbox Story
+https://github.com/UBC-GEOS472-Spring2023/VancouverWatershed/blob/main/config.js
+![Sentinel-2 Mosaic over Mapbox 3D Terrain](https://github.com/UBC-GEOS472-Spring2023/VancouverWatershed/blob/main/3dpic.png)
 
-## Link to the 3D representation visual: 
+## Link to the path analysis visual:
 https://ubc-geos472-spring2023.github.io/VancouverWatershed/line3.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line2.html , https://ubc-geos472-spring2023.github.io/VancouverWatershed/line.html
 
 ![Screenshot of the animated path moving through Vancouver](https://ubc-geos472-spring2023.github.io/VancouverWatershed/animation.png)
