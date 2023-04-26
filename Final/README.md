@@ -33,6 +33,6 @@ https://carlwittmann.github.io/StreamAnimation/
 ## Water Consumption Infographic
 
 ![Water Consumption Infographic](https://github.com/UBC-GEOS472-Spring2023/VancouverWatershed/blob/main/Layout2.jpg)
-*Figure: Concept image of an unimplemented infographic
+*Figure: Concept image of an unimplemented infographic*
 
 
