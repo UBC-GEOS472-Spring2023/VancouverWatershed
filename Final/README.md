@@ -20,5 +20,6 @@ https://ubc-geos472-spring2023.github.io/VancouverWatershed/lakelevelfinal.html
 
 ## Watershed Stream Animation
 
-<iframe src="https://carlwittmann.github.io/StreamAnimation/" width="100%" height="300px"></iframe>
+<iframe src="https://carlwittmann.github.io/StreamAnimation/" width="600" height="400" frameborder="0" scrolling="no"></iframe>
+
 
