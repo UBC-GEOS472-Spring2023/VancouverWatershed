@@ -26,6 +26,8 @@ https://ubc-geos472-spring2023.github.io/VancouverWatershed/lakelevelfinal.html
 
 ## Link to the Watershed Stream Animation (Give it some time to load!)
 https://carlwittmann.github.io/StreamAnimation/
+ArcPy script: https://github.com/carlwittmann/StreamAnimation/blob/main/exportgeojsons.py
+Animation sketch: https://github.com/carlwittmann/StreamAnimation/blob/main/sketch.js
 
 ![Stream Animation](https://ubc-geos472-spring2023.github.io/VancouverWatershed/streamanimationpic.png)
 *Figure: A still image of the unused animation. Probably for the best - the map already struggles to render the static polylines!*
