@@ -18,8 +18,9 @@ https://ubc-geos472-spring2023.github.io/VancouverWatershed/lakelevelfinal.html
 *Figure: The lake recieved less than 100 cubic meters per second during this given season*
 
 
-## Watershed Stream Animation
+## Link to the Watershed Stream Animation (Give it some time to load!)
+https://carlwittmann.github.io/StreamAnimation/
 
-<iframe src="https://carlwittmann.github.io/StreamAnimation/" width="600" height="400" frameborder="0" scrolling="no"></iframe>
+![Stream Animation](https://ubc-geos472-spring2023.github.io/VancouverWatershed/streamanimationpic.png)
 
 
